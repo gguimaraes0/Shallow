@@ -1,0 +1,18 @@
+logica de controle de site
+requisições c#
+entrar login
+registro login
+back configurações
+front configurações
+visualização de sites cadastrados
+
+
+
+
+adicionar site
+enviar email
+autorizar email
+criar corpo do email
+
+
+

@@ -1,28 +1,38 @@
-exports.handler = async (event) => {
-    // TODO implement\
-    var responseMessage = {};
-    var statusCode;
+const mysql = require('mysql');
+exports.handler = (event, context, callback) => {
+	const con = mysql.createConnection({
+        host: 'shallowdb.cu13esdhujyb.sa-east-1.rds.amazonaws.com',
+        user: 'admin',
+        port: "3306",
+        password: '12345678',
+        database: 'ShallowDB',
+	});
 
-    try {
-        var site = event.body.site;
-        var username = event.body.username;
-        
-        // é feita a conexão com o banco de dados para alterar a permissão do site
+	var responseMessage = '';
+	var statusCode;
 
-        statusCode = '200';
-        responseMessage.message = 'Resposta enviada com sucesso';
-    }
-    catch (ex) {
-        statusCode = '500';
-        responseMessage.message = 'Ocorreu um problema no servidor';
-    }
-    finally {
-
-        const response = {
-            statusCode: statusCode,
-            body: JSON.stringify(responseMessage)
-        };
-
-        return response;
-    }
+	try {
+	    var site = JSON.parse(event.body);
+		context.callbackWaitsForEmptyEventLoop = false;
+		const sql = "UPDATE site SET status = " + site.status + " WHERE id =" + site.id;
+		con.query(sql, (err, res) => {
+			if (err) {
+				throw err;
+			}
+			else {
+				callback(null, 'Site Atualizado com sucesso');
+			}
+		});
+	}
+	catch (ex) {
+		statusCode = '500';
+		responseMessage = 'Ocorreu um problema no servidor ' + ex;
+	}
+	finally {
+		const response = {
+			statusCode: statusCode,
+			body: responseMessage
+		};
+		return response;
+	}
 };

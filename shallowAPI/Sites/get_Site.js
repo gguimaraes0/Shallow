@@ -1,29 +1,37 @@
-exports.handler = async (event) => {
-    // TODO implement\
-    var responseMessage = {};
-    var statusCode;
+const mysql = require('mysql');
+exports.handler = (event, context, callback) => {
+	const con = mysql.createConnection({
+        host: 'shallowdb.cu13esdhujyb.sa-east-1.rds.amazonaws.com',
+        user: 'admin',
+        port: "3306",
+        password: '12345678',
+        database: 'ShallowDB',
+	});
 
-    try {
-        // conexão com o  banco de dados
-        var sites = [
-            {url: 'www.google.com.br', permission:'1'},
-            {url: 'www.csmoney.com', permission:'3'} //permissionamento feito podendo estar aprovado,pendente e negado (1,2,3)
-        ];
-        responseMessage = sites;
-        statusCode = '200';
-        
-    }
-    catch (ex) {
-        statusCode = '500';
-        responseMessage.message = 'Ocorreu um problema no servidor';
-    }
-    finally {
+	var responseMessage = {};
+	var statusCode;
 
-        const response = {
-            statusCode: statusCode,
-            body: JSON.stringify(responseMessage)
-        };
-
-        return response;
-    }
+	try {
+		context.callbackWaitsForEmptyEventLoop = false;
+		const sql = "SELECT * FROM site";
+		con.query(sql, (err, res) => {
+			if (err) {
+				throw err;
+			}
+			else {
+				callback(null, res);
+			}
+		});
+	}
+	catch (ex) {
+		statusCode = '500';
+		responseMessage = 'Ocorreu um problema no servidor ' + ex;
+	}
+	finally {
+		const response = {
+			statusCode: statusCode,
+			body: JSON.stringify(responseMessage)
+		};
+		return response;
+	}
 };

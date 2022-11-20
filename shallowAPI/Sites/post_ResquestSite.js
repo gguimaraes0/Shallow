@@ -1,26 +1,37 @@
-exports.handler = async (event) => {
-    // TODO implement\
+const mysql = require('mysql');
+exports.handler =  (event, context, callback) => {
+     const con = mysql.createConnection({
+        host: 'shallowdb.cu13esdhujyb.sa-east-1.rds.amazonaws.com',
+        user: 'admin',
+        port: "3306",
+        password: '12345678',
+        database: 'ShallowDB',
+    });
     var responseMessage = {};
     var statusCode;
-
-    try {
-        var site = event.body.site;
-        var user = event.body.user;
-        // conexão com o  banco de dados para adicionar o site e manter com status pendente
-        statusCode = '200';
-        responseMessage.message = 'Solicitação feita com sucesso';
+    
+     try {
+       var site = JSON.parse(event.body);
+          context.callbackWaitsForEmptyEventLoop = false;
+          const sql = "INSERT INTO site (url, status, criancaID) VALUES ('" + site.url + "','" + site.status + "','" + site.criancaID + "')";
+          con.query(sql, (err, res) => {
+            if (err) {
+                throw err;
+            }
+            else{
+             callback(null, 'Registrado com sucesso.');
+            }
+        });
     }
     catch (ex) {
         statusCode = '500';
-        responseMessage.message = 'Ocorreu um problema no servidor';
+        responseMessage = 'Ocorreu um problema no servidor ' + ex;
     }
     finally {
-
         const response = {
             statusCode: statusCode,
             body: JSON.stringify(responseMessage)
         };
-
         return response;
     }
 };

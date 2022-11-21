@@ -1,4 +1,3 @@
-logica de controle de site
 requisições c#
 registro login
 

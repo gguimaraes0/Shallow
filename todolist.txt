@@ -2,10 +2,6 @@ logica de controle de site
 requisições c#
 entrar login
 registro login
-back configurações
-front configurações
-visualização de sites cadastrados
-
 
 
 

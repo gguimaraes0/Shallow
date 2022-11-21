@@ -1,6 +1,5 @@
 logica de controle de site
 requisições c#
-entrar login
 registro login
 
 

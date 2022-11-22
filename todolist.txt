@@ -1,5 +1,6 @@
 requisições c#
-registro login
+registro responsavel
+registro crianca
 
 
 

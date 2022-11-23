@@ -10,5 +10,5 @@ https://documenter.getpostman.com/view/14079137/2s7YtMKy3o
 
 - Foi utilizado Node.js 16 para sua montagem
 <br>
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/bdDYhxT/7-KQEq-CC-Imgur.png" alt="7-KQEq-CC-Imgur" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/pwwYp6R/imagem-2022-11-23-150734456.png" alt="imagem-2022-11-23-150734456" border="0"></a>
 

@@ -1,7 +1,5 @@
 requisições c#
 registro responsavel
-registro crianca
-
 
 
 adicionar site

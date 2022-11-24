@@ -15,3 +15,14 @@ https://documenter.getpostman.com/view/14079137/2s7YtMKy3o
 Link do projeto
 
 https://github.com/gguimaraes0/WebBrowser
+
+Integrantes
+
+Caio Foramiglio - 081190043
+Lucas Frias - 081190009
+Matheus Sarquis - 081190031
+Gustavo Guimarães - 081180013
+
+Link da aplicação comentada
+
+https://youtu.be/KyWMKvHQWwY
